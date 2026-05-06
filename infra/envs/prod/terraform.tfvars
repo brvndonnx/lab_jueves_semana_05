@@ -1,0 +1,9 @@
+env                       = "prod"
+aws_region                = "us-east-1"
+vpc_cidr                  = "10.2.0.0/16"
+lambda_memory_upload      = 256
+lambda_memory_crop        = 512
+s3_uploads_expiry_days    = 7
+s3_processed_expiry_days  = 30
+sqs_visibility_timeout    = 360
+alarm_sns_endpoint        = "breyesf2@upao.edu.pe"
