@@ -14,3 +14,9 @@ provider "aws" {
   region  = var.aws_region
   profile = "infra-deployer"
 }
+
+module "vpc" {
+  source     = "../../modules/vpc"
+  cidr_block = var.vpc_cidr
+  env        = var.env
+}
