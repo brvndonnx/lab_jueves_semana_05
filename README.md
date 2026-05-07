@@ -5,7 +5,17 @@ Se despliega una infraestructura orientada a eventos en AWS utilizando Terraform
 Organización del repositorio en modules/ y envs/
 ## Backend Remoto
 - Configuración de S3 para el terraform.tfstate
-- DynamoDB para el State Locking garantizando la integridad del despliegue.
+- DynamoDB para el State Locking garantizando la integridad del despliegue
+## Módulo VPC
+Despliegue de subredes en múltiples zonas de disponibilidad
+## IAM de Mínimo Privilegio
+Roles específicos para cada Lambda, evitando el uso de políticas administradas excesivas
+## Módulo Lambda
+Empaquetado automático de artefactos y configuración de triggers ESM
+## Despliegue Secuencial
+Flujo de promoción de código: DEV -> QA -> PROD.
+## Destroy
+Procedimiento documentado de destrucción, incluyendo el vaciado previo de Buckets S3 y limpieza total de la región.
 ## 1. Herramientas
 * **Infraestructura:** AWS (VPC, S3, SQS, IAM, API Gateway, Lambda, CloudWatch)
 * **IaC:** Terraform 
@@ -23,7 +33,6 @@ terraform apply -auto-approve
 ### 4. Prueba de validación
 #### 1. Convertí la imagen a formato base64
 IMAGEN_BASE64=$(base64 -w 0 test.jpg)
-
 #### 2. Se envía la petición al API Gateway
 curl -X POST https://shx4ev720f.execute-api.us-east-1.amazonaws.com/upload \
 -H "Content-Type: application/json" \
