@@ -2,20 +2,20 @@
 # Laboratorio Semana 05: Arquitectura de Procesamiento de Imágenes (Dev)
 Se despliega una infraestructura orientada a eventos en AWS utilizando Terraform, integrando API Gateway, Lambda, SQS y S3 dentro de una VPC
 ## Estructura Modular del Proyecto
-├── infra/
-│   ├── modules/
-│   │   ├── vpc/    
-│   │   ├── iam/ 
-│   │   ├── lambda/
-│   │   ├── s3/   
-│   │   └── sqs/   
-│   └── envs/
-│       └── dev/
-│       └── prod/
-│       └── qa/
-└── src/
-    └── process-lambda
-    └── upload-lambda
+###├── infra/
+###│   ├── modules/
+###│   │   ├── vpc/    
+###│   │   ├── iam/ 
+###│   │   ├── lambda/
+###│   │   ├── s3/   
+###│   │   └── sqs/   
+###│   └── envs/
+###│       └── dev/
+###│       └── prod/
+###│       └── qa/
+###└── src/
+###    └── process-lambda
+###    └── upload-lambda
 ## 1. Herramientas
 * **Infraestructura:** AWS (VPC, S3, SQS, IAM, API Gateway, Lambda, CloudWatch)
 * **IaC:** Terraform 
