@@ -3,6 +3,9 @@
 Se despliega una infraestructura orientada a eventos en AWS utilizando Terraform, integrando API Gateway, Lambda, SQS y S3 dentro de una VPC
 ## Estructura Modular
 Organización del repositorio en modules/ y envs/
+## Backend Remoto
+- Configuración de S3 para el terraform.tfstate
+- DynamoDB para el State Locking garantizando la integridad del despliegue.
 ## 1. Herramientas
 * **Infraestructura:** AWS (VPC, S3, SQS, IAM, API Gateway, Lambda, CloudWatch)
 * **IaC:** Terraform 
