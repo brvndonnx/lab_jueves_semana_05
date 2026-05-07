@@ -2,20 +2,40 @@
 # Laboratorio Semana 05: Arquitectura de Procesamiento de Imágenes (Dev)
 Se despliega una infraestructura orientada a eventos en AWS utilizando Terraform, integrando API Gateway, Lambda, SQS y S3 dentro de una VPC
 ## Estructura Modular del Proyecto
-###├── infra/
-###│   ├── modules/
-###│   │   ├── vpc/    
-###│   │   ├── iam/ 
-###│   │   ├── lambda/
-###│   │   ├── s3/   
-###│   │   └── sqs/   
-###│   └── envs/
-###│       └── dev/
-###│       └── prod/
-###│       └── qa/
-###└── src/
-###    └── process-lambda
-###    └── upload-lambda
+.
+├── infra/                          # Infraestructura como Código (Terraform)
+│   ├── modules/                    # Módulos reutilizables
+│   │   ├── vpc/                    # Configuración de Red
+│   │   │   ├── main.tf             # VPC, Subnets, IGW, NAT Gateway
+│   │   │   ├── variables.tf
+│   │   │   └── outputs.tf
+│   │   ├── iam/                    # Seguridad y Permisos
+│   │   │   ├── main.tf             # Roles y Master Policies (S3/SQS/VPC)
+│   │   │   ├── variables.tf
+│   │   │   └── outputs.tf
+│   │   ├── lambda/                 # Definición de Funciones
+│   │   │   ├── main.tf             # AWS Lambda y Triggers
+│   │   │   ├── variables.tf
+│   │   │   └── outputs.tf
+│   │   ├── s3/                     # Almacenamiento
+│   │   │   ├── main.tf             # Buckets y Carpetas (/uploads, /processed)
+│   │   │   └── variables.tf
+│   │   └── sqs/                    # Mensajería
+│   │       ├── main.tf             # Queue y Dead Letter Queue (DLQ)
+│   │       └── variables.tf
+│   └── envs/                       # Entornos de Despliegue
+│       ├── dev/                    # Entorno de Desarrollo (Trujillo-LAB)
+│       │   ├── main.tf             # Orquestación de módulos
+│       │   ├── variables.tf        # Valores específicos (CIDR, Nombres)
+│       │   ├── terraform.tfvars    # Credenciales y Configuración
+│       │   └── outputs.tf          # API_URL y ARNs
+│       ├── prod/                   # Entorno de Producción
+│       └── qa/                     # Entorno de Calidad
+└── src/                            # Código Fuente de Aplicación
+    ├── upload-lambda/              # Microservicio de Carga
+    │   └── index.mjs               # Lógica: Base64 -> S3 -> SQS
+    └── process-lambda/             # Microservicio de Procesamiento
+        └── index.mjs               # Lógica: Transformación de Imagen
 ## 1. Herramientas
 * **Infraestructura:** AWS (VPC, S3, SQS, IAM, API Gateway, Lambda, CloudWatch)
 * **IaC:** Terraform 
