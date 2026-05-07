@@ -16,10 +16,10 @@ terraform init
 Cree la infraestructura definida en los archivos .tf
 terraform apply -auto-approve
 ### 4. Prueba de validación
-# 1. Convertí la imagen a formato base64
+#### 1. Convertí la imagen a formato base64
 IMAGEN_BASE64=$(base64 -w 0 test.jpg)
 
-# 2. Se envía la petición al API Gateway
+#### 2. Se envía la petición al API Gateway
 curl -X POST https://shx4ev720f.execute-api.us-east-1.amazonaws.com/upload \
 -H "Content-Type: application/json" \
 -d "{
