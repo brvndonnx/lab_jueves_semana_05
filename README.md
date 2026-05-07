@@ -2,40 +2,40 @@
 # Laboratorio Semana 05: Arquitectura de Procesamiento de Imágenes (Dev)
 Se despliega una infraestructura orientada a eventos en AWS utilizando Terraform, integrando API Gateway, Lambda, SQS y S3 dentro de una VPC
 ## Estructura Modular del Proyecto
-.
+` ` `.
 ├── infra/                          # Infraestructura como Código (Terraform)
-│   ├── modules/                    # Módulos reutilizables
-│   │   ├── vpc/                    # Configuración de Red
-│   │   │   ├── main.tf             # VPC, Subnets, IGW, NAT Gateway
+│   ├── modules/                    # Módulos reutilizables y desacoplados
+│   │   ├── vpc/                    # Networking: VPC, Subnets, IGW, NAT Gateway
+│   │   │   ├── main.tf             
 │   │   │   ├── variables.tf
 │   │   │   └── outputs.tf
-│   │   ├── iam/                    # Seguridad y Permisos
-│   │   │   ├── main.tf             # Roles y Master Policies (S3/SQS/VPC)
+│   │   ├── iam/                    # Seguridad: Roles, Policies y Trust Relationships
+│   │   │   ├── main.tf             
 │   │   │   ├── variables.tf
 │   │   │   └── outputs.tf
-│   │   ├── lambda/                 # Definición de Funciones
-│   │   │   ├── main.tf             # AWS Lambda y Triggers
+│   │   ├── lambda/                 # Compute: Configuración de AWS Lambda y Triggers
+│   │   │   ├── main.tf             
 │   │   │   ├── variables.tf
 │   │   │   └── outputs.tf
-│   │   ├── s3/                     # Almacenamiento
-│   │   │   ├── main.tf             # Buckets y Carpetas (/uploads, /processed)
+│   │   ├── s3/                     # Storage: Buckets y Estructura de Carpetas
+│   │   │   ├── main.tf             
 │   │   │   └── variables.tf
-│   │   └── sqs/                    # Mensajería
-│   │       ├── main.tf             # Queue y Dead Letter Queue (DLQ)
+│   │   └── sqs/                    # Messaging: Colas de Mensajería y DLQ
+│   │       ├── main.tf             
 │   │       └── variables.tf
-│   └── envs/                       # Entornos de Despliegue
+│   └── envs/                       # Orquestación por Entornos
 │       ├── dev/                    # Entorno de Desarrollo (Trujillo-LAB)
-│       │   ├── main.tf             # Orquestación de módulos
-│       │   ├── variables.tf        # Valores específicos (CIDR, Nombres)
-│       │   ├── terraform.tfvars    # Credenciales y Configuración
-│       │   └── outputs.tf          # API_URL y ARNs
+│       │   ├── main.tf             
+│       │   ├── variables.tf        
+│       │   ├── terraform.tfvars    
+│       │   └── outputs.tf          
 │       ├── prod/                   # Entorno de Producción
 │       └── qa/                     # Entorno de Calidad
-└── src/                            # Código Fuente de Aplicación
-    ├── upload-lambda/              # Microservicio de Carga
-    │   └── index.mjs               # Lógica: Base64 -> S3 -> SQS
-    └── process-lambda/             # Microservicio de Procesamiento
-        └── index.mjs               # Lógica: Transformación de Imagen
+└── src/                            # Lógica de Negocio (Source Code)
+    ├── upload-lambda/              # Microservicio: Ingesta de Datos
+    │   └── index.mjs               # Decodificación Base64 y Trigger SQS
+    └── process-lambda/             # Microservicio: Procesamiento de Imágenes
+        └── index.mjs               # Transformación y Registro Final` ` `
 ## 1. Herramientas
 * **Infraestructura:** AWS (VPC, S3, SQS, IAM, API Gateway, Lambda, CloudWatch)
 * **IaC:** Terraform 
